@@ -1,23 +1,32 @@
-# snakeAI
+# SnakeAI: Deep Reinforcement Learning in Action
 
-This is a deep learning algorithm that learns to play the game snake with the given information about its surrounding environment.
+## Overview
+SnakeAI is a deep learning project where an AI algorithm learns to play the game of Snake. The projectuses Deep Q Learning and Long Short-Term Memory (LSTM) to create a self-learning AI capable of navigating complex scenarios and improving its performance over time.
 
-Each state is either true or false
+## Game Mechanics
+The AI is trained to play Snake, a game where the primary objective is to grow the snake by consuming apples while avoiding collisions with the snake's body or the game boundaries. The AI receives environmental input in the form of a state vector:
 
-[danger left, danger right, danger straight, direction left, direction right, direction up, direciton down, food left, food up, food right, food down]
+`[danger left, danger right, danger straight, direction left, direction right, direction up, direction down, food left, food up, food right, food down]`
 
-In the image below the information would be as follows [0, 0, 0, 0, 0, 1, 0, 1, 0 ,0, 0], direcition is up and food is up, no danger.
+Each element of this state vector is a boolean representing the immediate environment of the snake.
 
-It goes through two linear hidden layers and ouputs next state [move left, move right, move straight]
+For example, the state `[0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0]` indicates no immediate danger, with the snake moving upwards and the food located left.
+
+## Neural Network Architecture
+The SnakeAI employs a multi-layer linear neural network model built using PyTorch. The network includes:
+
+- **Long Short-Term Memory (LSTM) Layers**: Enhances the AI's ability to remember and leverage past actions and outcomes, vital for strategic decision-making in complex environments.
+- **Linear Hidden Layers**: Processes the input state to determine the best course of action, with outputs corresponding to move left, move right, or move straight.
+
+## Reinforcement Learning
+The AI leverages Reinforcement Learning (RL) principles, where it learns optimal gameplay strategies through trial and error. This learning process is characterized by:
+
+- **Reward System**: Gaining +10 reward for eating an apple and receiving -10 as a penalty for running into the wall or itself.
+- **Exploration Strategy**: For the initial 80 games, the AI focuses on exploration to understand various aspects of the game environment.
+
+## Performance Visualization
+The training progress and performance of the AI are visually represented in a graph, where:
+- **Blue Lines**: Indicate the score of each game.
+- **Orange Line**: Represents the moving average of the scores, showcasing the learning progression of the AI.
 
 ![snake](https://user-images.githubusercontent.com/115834230/199955735-cd24b08f-9020-40da-bc98-528de06ad1c4.png)
-
-Blue lines represent score of each game and orange line the mean of scores.
-
-The algorithm uses Deep Q learning and long short term memory.
-
-Running into itself or the wall means game over and -10 reward, eating an apple is +10 reward.
-
-first 80 games exploration is the main objective of the snake.
-
-
